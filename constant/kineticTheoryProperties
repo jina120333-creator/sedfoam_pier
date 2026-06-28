@@ -1,0 +1,60 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2506                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      kineticTheoryProperties;
+}
+// ************************************************************************* //
+
+// Activate kinetic theory for particle collision stress.
+kineticTheory          off; //on; //off
+equilibrium            off;
+limitProduction        off;
+
+// Restitution coefficient for sand grains.
+e                      e  [0 0 0 0 0 0 0] 0.9; //0.6-1
+
+// Inter-particle friction coefficient in KTGF.
+// Start from zero; Coulomb friction is handled in granularRheologyProperties.
+muPart                 muPart  [0 0 0 0 0 0 0] 0.0; //0-1
+
+// Maximum solid volume fraction.
+alphaMax              alphaMax [0 0 0 0 0 0 0] 0.635; //0.6-1
+
+// Maximum granular temperature allowed for numerical stability.
+MaxTheta              MaxTheta [0 2 -2 0 0 0 0] 0.01; //0.05; //0.001-1e5
+
+// Friction angle in degrees.
+phi                   phi  [0 0 0 0 0 0 0] 32; //20-40
+
+// Model switches.
+KineticJ1             KineticJ1 [ 0 0 0 0 0 0 0 ] 0; //1
+
+killJ2                killJ2  [0 0 0 0 0 0 0] 1; //0 or 1
+
+KineticJ3             KineticJ3 [ 0 0 0 0 0 0 0] 0;
+
+quadraticCorrectionJ1 quadraticCorrectionJ1 [0 0 0 0 0 0 0] 1;
+
+granularPressureModel  Lun;
+
+viscosityModel         Gidaspow;
+
+conductivityModel      Gidaspow;
+
+radialModel            Gidaspow;
+//radialModel            CarnahanStarling;
+
+frictionalStressModel JohnsonJackson;
+
+// ************************************************************************* //

@@ -1,0 +1,60 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2506                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      transportProperties;
+}
+// ************************************************************************* //
+
+//sediment
+phasea
+{
+    rho             rho  [1 -3 0 0 0 0 0] 2650;
+    nu              nu   [0 2 -1 0 0] 1e-6;
+    d               d    [0 1 0 0 0 0 0] 6e-4; //0.6mm in Li et al.
+    sF              sF   [0 0 0 0 0 0 0] 1.0; // 1.0 means nearly spherical grains.
+    hExp            hExp [ 0 0  0 0 0 0 0 ] 2.65;  // hindrance exponent for drag: beta^(-hExp) (2.65 by default)
+}
+
+//water
+phaseb
+{
+    rho             rho  [1 -3 0 0 0 0 0] 1000;
+    nu              nu   [0 2 -1 0 0 0 0] 1.0e-6; //2.105e-05
+    d               d    [0 1 0 0 0 0 0] 290e-6; //10e-6;   
+    sF              sF   [ 0 0  0 0 0 0 0 ] 1.;
+    hExp            hExp [ 0 0  0 0 0 0 0 ] 2.65;
+}
+
+// ************************************************************************* //
+
+// Minimum solid volume fraction used for numerical regularization.
+// It prevents division by zero when alpha.a is nearly zero.
+alphaSmall          alphaSmall      [0 0 0 0 0 0 0] 1e-6; //1e-8
+
+// Artificial diffusivity for alpha.
+// Keep zero first. Increase only if alpha oscillation becomes severe.
+alphaDiffusion      alphaDiffusion  [0 2 -1 0 0 0 0] 0;
+
+// Maximum sediment-phase frictional viscosity.
+nuFraMax            nuFraMax        [0 2 -1 0 0 0 0] 1.0e3;
+
+// Maximum explicit viscosity contribution.
+nuMaxExp            nuMaxExp        [0 2 -1 0 0 0 0] 1.0;
+
+transportModel  Newtonian;
+
+nu              nu [ 0 2 -1 0 0 0 0 ] 1e-06; //2.105e-05; (phaseb와 동일)
+
+nuMax        nuMax [0 2 -1 0 0 0 0] 100; //1e0;      // viscosity limiter for the Frictional model (required for stability)
+// ************************************************************************* //

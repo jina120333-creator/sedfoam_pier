@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2506                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      forceProperties;
+}
+// ************************************************************************* //
+
+// * * * * * * * * * following are for pressure * * * * * * * * * //
+// In this case, the flow is driven by inlet velocity, not by pressure gradient.
+gradPMEAN       gradPMEAN      [1 -2 -2 0 0 0 0] (0 0 0); //mean external pressure gradient
+
+// Oscillatory pressure-gradient components.
+// Not used in this steady approach-flow scour case.
+gradPAMP1       gradPAMP1      [1 -2 -2 0 0 0 0] (0 0 0); // pressure osci amp
+gradPAMP2       gradPAMP2      [1 -2 -2 0 0 0 0] (0 0 0); // pressure osci amp
+gradPAMP3       gradPAMP3      [1 -2 -2 0 0 0 0] (0 0 0);
+gradPAMP4       gradPAMP4      [1 -2 -2 0 0 0 0] (0 0 0);
+gradPAMP5       gradPAMP5      [1 -2 -2 0 0 0 0] (0 0 0);
+
+oscpT           oscpT          [0 0 0 0 0 0 0] 0; //oscillation period
+
+initTheta1      initTheta1     [0 0 0 0 0 0 0] 0; // initial phase of 1st order wave
+initTheta2      initTheta2     [0 0 0 0 0 0 0] 0; // initial phase of 2nd order wave
+initTheta3      initTheta3     [0 0 0 0 0 0 0] 0;
+initTheta4      initTheta4     [0 0 0 0 0 0 0] 0;
+initTheta5      initTheta5     [0 0 0 0 0 0 0] 0;
+
+// Do not mimic bed slope using pressure gradient.
+tilt            tilt           [0 0 0 0 0 0 0] 0;
+
+// Start from zero for stability and simplicity.
+Cvm             Cvm            [0 0 0 0 0 0 0] 0; // Virtual/Added Mass coefficient
+Cl              Cl             [0 0 0 0 0 0 0] 0; // Lift force coefficient
+Ct              Ct             [0 0 0 0 0 0 0] 0; // Eddy diffusivity coefficient for phase a
+
+// Do not freeze the solid phase for the first mobile-bed scour test.
+InitFreeze      InitFreeze     [0 0 0 0 0 0 0] 0;
+fixbeddepth     fixbeddepth    [0 1 0 0 0 0 0] 0;
+
+debugInfo   true;
+
+/*
+// If alpha.a is very small, this option can force U.a close to U.b.
+// Keep off at first.
+ClipUa          ClipUa         [0 0 0 0 0 0 0] 0;
+
+writeTau        false;
+debugInfo       false;
+
+// No sponge layer for this first local-domain test.
+spongeLayer     false;
+xSmin           xSmin          [0 1 0 0 0 0 0] 0;
+xSmax           xSmax          [0 1 0 0 0 0 0] 0;
+*/
+
+// ************************************************************************* //
+

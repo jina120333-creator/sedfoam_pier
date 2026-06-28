@@ -1,0 +1,46 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2506                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      ppProperties;
+}
+// ************************************************************************* //
+// parameters for pff
+
+// Permanent contact pressure model.
+// JohnsonJackson is commonly used for non-cohesive spherical grains.
+ppModel         JohnsonJackson;
+
+// Maximum solid volume fraction.
+alphaMax        alphaMax        [0 0 0 0 0 0 0] 0.635;
+
+// Solid volume fraction above which frictional contact pressure develops.
+alphaMinFriction alphaMinFriction [0 0 0 0 0 0 0] 0.57;
+
+// Elastic modulus-like coefficient for frictional pressure.
+Fr              Fr              [1 -1 -2 0 0 0 0] 5e-2;
+
+// Empirical exponents.
+eta0            eta0            [0 0 0 0 0 0 0] 3; //range 1-3
+eta1            eta1            [0 0 0 0 0 0 0] 5; //range 5
+
+// parameters for ppMagf (if g<0 is not used)
+
+preAlphaExp     500;
+
+expMax          10000;
+
+g0              g0 [ 1 -1 -2 0 0 0 0 ] -1e+3;
+
+packingLimiter  yes; //no;
+// ************************************************************************* //
