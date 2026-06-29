@@ -18,25 +18,27 @@ FoamFile
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform (0 0 0); //0.233m/s
+internalField   uniform (0 0 0);
 boundaryField
 {
     inletWater
     {
         // Log-law velocity profile matching Li et al. experimental conditions:
         //   u* = 0.016 m/s, U0 = 0.233 m/s (depth-averaged), h = 0.05 m
-        //   z0 = 4.68e-5 m,  u(z) = (u*/kappa)*ln(z/z0) = 0.0390*ln(z/4.68e-5)
+        //   z0 = 4.68e-5 m,  u(z) = (u*/kappa)*ln(z/z0) = 0.03902*ln(z/4.68e-5)
+        //
+        // Depth-averaged check: integral gives ~0.233 m/s over [0, 0.05 m]. OK.
         type            fixedProfile;
         direction       (0 0 1);
         origin          0;
         profile         table
         (
             (0.0000  (0.000  0 0))
-            (0.0001  (0.083  0 0))
-            (0.0005  (0.146  0 0))
+            (0.0001  (0.030  0 0))
+            (0.0005  (0.092  0 0))
             (0.0010  (0.119  0 0))
-            (0.0020  (0.173  0 0))
-            (0.0030  (0.197  0 0))
+            (0.0020  (0.147  0 0))
+            (0.0030  (0.162  0 0))
             (0.0050  (0.182  0 0))
             (0.0100  (0.209  0 0))
             (0.0150  (0.225  0 0))
