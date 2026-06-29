@@ -43,8 +43,8 @@ phaseb
 alphaSmall          alphaSmall      [0 0 0 0 0 0 0] 1e-6; //1e-8
 
 // Artificial diffusivity for alpha.
-// Keep zero first. Increase only if alpha oscillation becomes severe.
-alphaDiffusion      alphaDiffusion  [0 2 -1 0 0 0 0] 0;
+// 1e-6 added to suppress sharp alpha gradients near pier base.
+alphaDiffusion      alphaDiffusion  [0 2 -1 0 0 0 0] 1e-6;
 
 // Maximum sediment-phase frictional viscosity.
 nuFraMax            nuFraMax        [0 2 -1 0 0 0 0] 1.0e3;
