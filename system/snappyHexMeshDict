@@ -19,7 +19,7 @@ FoamFile
 
 castellatedMesh true;
 snap            true;
-addLayers       false;
+addLayers       true;
 
 // Geometry
 geometry
@@ -136,7 +136,7 @@ snapControls
     nSmoothPatch 5; //3;
     tolerance 1.0;
     nSolveIter 30; //20-40
-    nRelaxIter 5; //8;
+    nRelaxIter 8; //8;
     nFeatureSnapIter 10; //10-20
     // No eMesh file is required because we use implicit feature snapping.
     implicitFeatureSnap true; //false;
@@ -151,11 +151,15 @@ addLayersControls
 
     layers
     {
+        pier
+        {
+            nSurfaceLayers 3;
+        }
     }
 
     expansionRatio 1.2;
     finalLayerThickness 0.3; // final layer thickness=near cell size*0.3
-    //firstLayerThickness --; 
+    //firstLayerThickness --;
     minThickness 0.1; //total layer thickness<near cell size*0.1; layer 생성안함
 
     nGrow 0;
