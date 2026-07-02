@@ -43,13 +43,15 @@ blocks
 (
     // Sediment layer:
     // z = -0.06 ~ 0.00
-    // dz = 0.005 m, 12 cells
-    hex (0 1 2 3 4 5 6 7) (140 25 6) simpleGrading (1 1 1)
+    // Graded so cells are finest next to the bed/water interface (z = 0)
+    // and coarsen toward the bottom.
+    hex (0 1 2 3 4 5 6 7) (140 25 12) simpleGrading (1 1 0.2)
 
     // Water layer:
     // z = 0.00 ~ 0.05
-    // dz = 0.005 m, 10 cells
-    hex (4 5 6 7 8 9 10 11) (140 25 5) simpleGrading (1 1 1)
+    // Graded so cells are finest next to the bed/water interface (z = 0)
+    // and coarsen toward the top.
+    hex (4 5 6 7 8 9 10 11) (140 25 12) simpleGrading (1 1 5)
 );
 
 edges
