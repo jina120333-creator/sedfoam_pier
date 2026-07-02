@@ -86,10 +86,12 @@ castellatedMeshControls
         pier
         {
             // With 10 mm background:
+            // level 2 -> 2.5 mm
             // level 3 -> 1.25 mm
-            // level 4 -> 0.625 mm
+            // level 4 -> 0.625 mm (too aggressive a jump from background level 0;
+            // caused a duplicate-face crash during snap's baffle-merge step)
 
-            level (3 4);
+            level (2 3);
 
             patchInfo
             {
@@ -105,14 +107,14 @@ castellatedMeshControls
         nearPierFineBox
         {
             mode inside;
-            levels ((1E15 3));
+            levels ((1E15 2));
         }
 
         scourBedFineBox
         {
             mode inside;
             //levels ((1E15 2));
-            levels ((1E15 4));
+            levels ((1E15 3));
         }
 /*
         bedRefinementBox
@@ -126,7 +128,9 @@ castellatedMeshControls
     // Must be inside the computational region and outside the pier solid.
     locationInMesh (-0.395 0.00 0.025);
 
-    allowFreeStandingZoneFaces true;
+    // No faceZones/cellZones are used, so free-standing baffle handling is
+    // unnecessary and was triggering a duplicate-face crash during snapping.
+    allowFreeStandingZoneFaces false;
 }
 
 // Snap controls
